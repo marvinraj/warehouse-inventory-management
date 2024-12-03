@@ -1,22 +1,33 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const testRouter = require('./routes/tests.route')
+const connectDB = require('./config/db')
+
 
 require('dotenv').config(); // loads the env variables
 
-// create express app
-const app = express();
+const app = express(); // create express app
 
-// store port from env variable
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000; // store port from env variable
 
-// allows request from different origins
-app.use(cors);
+// app.use(cors); // allows request from different origins
 
-// parses incoming json data in req body
-app.use(bodyParser.json())
+app.use(bodyParser.json()) // parses incoming json data in req body
+
+// testing post route
+app.use("/api/posts", testRouter)
+
+// test db connection
+connectDB.connect((err) => {
+    if (err){
+        console.log("error connecting to mysql");
+    } else {
+        console.log("successful connection with mysql!");
+    }
+})
 
 // start server
 app.listen(port, () => {
     console.log(`server is running at http://localhost:${port}`);
-})
+});
