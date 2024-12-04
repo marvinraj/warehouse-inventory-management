@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const testRouter = require('./routes/tests.route')
 const inventoryRoutes = require('./routes/inventory.route')
+const inBoundRoutes = require('./routes/inbound.route')
+const outBoundRoutes = require('./routes/outbound.route')
 const connectDB = require('./config/db')
 
 
@@ -14,11 +16,15 @@ const port = process.env.PORT || 5000; // store port from env variable
 // app.use(cors); // allows request from different origins
 app.use(bodyParser.json()) // parses incoming json data in req body
 
+// ALL ROUTES
 // testing post route
-app.use("/api/posts", testRouter)
-
+app.use("/api/posts", testRouter);
 // inventory route
-app.use("/api/inventory", inventoryRoutes)
+app.use("/api/inventory", inventoryRoutes);
+// inbound route
+app.use("/api/inbound", inBoundRoutes);
+// outbound route
+app.use("/api/outbound", outBoundRoutes);
 
 // test db connection
 connectDB.connect((err) => {
