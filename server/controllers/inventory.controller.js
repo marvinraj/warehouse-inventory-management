@@ -1,7 +1,6 @@
-// logic of CRUD operations in here
 const db = require('../config/db');
 
-const getPost = (req,res) => {
+const getAllProducts = (req,res) => {
     // store sql query
     const q = "SELECT * FROM testtable;"
     // send stored query to database
@@ -13,6 +12,12 @@ const getPost = (req,res) => {
             return res.send(data)
         }
     });
-};
+}
 
-module.exports = { getPost };
+const addProduct = (req,res) => {}
+
+const updateProduct = (req,res) => {}
+
+const deleteProduct = (req,res) => {}
+
+module.exports = { getAllProducts, addProduct, updateProduct, deleteProduct };
