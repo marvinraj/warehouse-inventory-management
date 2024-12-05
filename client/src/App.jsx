@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar'
 function App() {
   return (
     <>
-      <div>
+      <div className='main-page'>
         <Sidebar/>
         <Dashboard/>
       </div>
