@@ -19,7 +19,7 @@ const Sidebar = () => {
         {/* MENU */}
         <ul className='text-sm text-gray-900 mt-8'>
             <li className='mb-2 hover:shadow hover:bg-blue-400 py-2'>
-                <a href="#">
+                <a href={"/"}>
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         fill="none" viewBox="0 0 24 24" 
@@ -32,7 +32,7 @@ const Sidebar = () => {
                 </a>
             </li>
             <li className='mb-2 hover:shadow hover:bg-blue-500 py-2'>
-                <a href="#">
+                <a href={"/inventory"}>
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         fill="none" viewBox="0 0 24 24" 
