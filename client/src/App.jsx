@@ -1,9 +1,14 @@
 import './App.css'
+import Dashboard from './components/Dashboard'
+import Sidebar from './components/Sidebar'
 
 function App() {
   return (
     <>
-      <h1>HELLOOO</h1>
+      <div>
+        <Sidebar/>
+        <Dashboard/>
+      </div>
     </>
   )
 }
