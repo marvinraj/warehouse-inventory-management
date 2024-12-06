@@ -36,6 +36,25 @@ const addInbound = (req,res) => {
     });
 }
 
+// logic to update a purchase
+const updateInbound = (req,res) => {
+    // store sql query
+    const inboundID = req.params.id;
+    const q = "UPDATE inbound SET `product_id` = ?, `product_name` = ?,`supplier` = ?,`quantity` = ?,`date_received` = ? WHERE id = ?";
+    const values = [
+        req.body.product_id,
+        req.body.product_name,
+        req.body.supplier,
+        req.body.quantity,
+        req.body.date_received
+    ];
+    // send stored query to database
+    db.query(q, [...values, inboundID], (err,data) => {
+        if (err) return res.send(err);
+        return res.send("product has been updated successfully!!!!");
+    })
+};
+
 // update to delete a product
 const deleteInbound = (req,res) => {
     // store sql query
@@ -49,4 +68,4 @@ const deleteInbound = (req,res) => {
     })
 };
 
-module.exports = { getAllInbounds, addInbound, deleteInbound }
+module.exports = { getAllInbounds, addInbound, deleteInbound, updateInbound }

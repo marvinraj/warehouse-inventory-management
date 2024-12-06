@@ -7,6 +7,7 @@ import AddProduct from './pages/AddProduct'
 import EditProduct from './pages/EditProduct'
 import Inbound from './pages/Inbound'
 import AddInbound from './pages/AddInbound'
+import EditInbound from './pages/EditInbound'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path='/editproduct/:id' element={<EditProduct/>}/>
       <Route path='/inbound' element={<Inbound/>}/>
       <Route path='/addpurchase' element={<AddInbound/>} />
+      <Route path='/editpurchase/:id' element={<EditInbound/>} />
     </Routes>
       {/* <div className='main-page'>
         <Sidebar/>
