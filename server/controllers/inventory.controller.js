@@ -2,37 +2,33 @@ const db = require('../config/db');
 
 const getAllProducts = (req,res) => {
     // store sql query
-    const q = "SELECT * FROM inventory;"
+    const q = "SELECT * FROM inventory"
     // send stored query to database
     db.query(q, (err, data) => {
-        if(err) {
-            return res.send("error occured")
+        if (err) {
+          console.log(err);
+          return res.json(err);
         }
-        else {
-            return res.send(data)
-        }
+        return res.json(data);
     });
-}
+};
 
 const addProduct = (req,res) => {
-    const q = "INSERT INTO inventory (`name`,`description`,`quantity`,`category`,`price`) VALUES (?)"
+    // store sql query
+    const q = "INSERT INTO inventory(`name`,`description`,`quantity`,`category`,`price`) VALUES (?)";
     const values = [
         req.body.name,
         req.body.description,
         req.body.quantity,
         req.body.category,
         req.body.price
-    ]
-
+    ];
+    // send stored query to database
     db.query(q, [values], (err,data) => {
-        if(err) {
-            return res.json(err)
-        }
-        else {
-            return res.json(data)
-        }
+        if (err) return res.send(err);
+        return res.send(data);
     });
-}
+};
 
 const updateProduct = (req,res) => {}
 

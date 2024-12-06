@@ -1,6 +1,6 @@
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+// const cors = require('cors');
+// const bodyParser = require('body-parser');
 const testRouter = require('./routes/tests.route')
 const inventoryRoutes = require('./routes/inventory.route')
 const inBoundRoutes = require('./routes/inbound.route')
@@ -19,7 +19,9 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 })
-app.use(bodyParser.json()) // parses incoming json data in req body
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json()) // parse the incoming requests with JSON payloads
 
 // ALL ROUTES
 // testing post route

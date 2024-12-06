@@ -1,16 +1,16 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
-import InventoryContent from '../components/InventoryContent'
+import AddProductContent from '../components/AddProductContent'
 
-const Inventory = () => {
+const AddProduct = () => {
   return (
     <section className='dashboard'>
         <div>
             <Sidebar/>
-            <InventoryContent/>
+            <AddProductContent/>
         </div>
     </section>
   )
 }
 
-export default Inventory;
+export default AddProduct;
