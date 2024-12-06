@@ -32,6 +32,16 @@ const addProduct = (req,res) => {
 
 const updateProduct = (req,res) => {}
 
-const deleteProduct = (req,res) => {}
+const deleteProduct = (req,res) => {
+    // store sql query
+    const productID = req.params.id;
+    const q = "DELETE FROM inventory WHERE id = ?";
+
+    // send stored query to database
+    db.query(q, [productID], (err,data) => {
+        if (err) return res.send(err);
+        return res.send("product has been deleted successfully!!!!");
+    })
+};
 
 module.exports = { getAllProducts, addProduct, updateProduct, deleteProduct };

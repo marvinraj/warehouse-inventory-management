@@ -35,24 +35,35 @@ const InventoryContent = () => {
                     <button className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'><Link to="/addproduct">Add New Product</Link></button>
                 </div>
                 {/* inventory items */}
-                <div className="products">
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Quantity</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                        </tr>
-                        {products.map((product) => (
-                            <tr className="product" key={product.id}>
-                                <th className='font-normal'>{product.name}</th>
-                                <th className='font-normal'>{product.description}</th>
-                                <th className='font-normal'>{product.quantity}</th>
-                                <th className='font-normal'>{product.category}</th>
-                                <th className='font-normal'>{product.price}</th>
+                <div className="products mt-5">
+                    <table className='w-full text-sm text-left rtl:text-right text-gray-800'>
+                        <thead className='text-xs text-gray-700 uppercase bg-gray-100'>
+                            <tr>
+                                <th scope="col" class="px-6 py-3">ID</th>
+                                <th scope="col" class="px-6 py-3">Name</th>
+                                <th scope="col" class="px-6 py-3">Description</th>
+                                <th scope="col" class="px-6 py-3">Quantity</th>
+                                <th scope="col" class="px-6 py-3">Category</th>
+                                <th scope="col" class="px-6 py-3">Price</th>
+                                <th scope='col' class='px-6 py-3'>Action</th>
                             </tr>
-                        ))}
+                        </thead>
+                        <tbody>
+                            {products.map((product) => (
+                                <tr class="bg-white border-b" key={product.id}>
+                                    <td className='px-6 py-3'>{product.id}</td>
+                                    <td className='px-6 py-3'>{product.name}</td>
+                                    <td className='px-6 py-3'>{product.description}</td>
+                                    <td className='px-6 py-3'>{product.quantity}</td>
+                                    <td className='px-6 py-3'>{product.category}</td>
+                                    <td className='px-6 py-3'>{product.price}</td>
+                                    <td className='px-6 py-3'>
+                                        <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
+                                        <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-2 me-2 mb-2">Edit</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
             </div>

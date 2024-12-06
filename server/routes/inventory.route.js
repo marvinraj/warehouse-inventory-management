@@ -13,6 +13,6 @@ router.post("/", addProduct);
 router.put("/", updateProduct);
 
 // delete a product
-router.delete("/", deleteProduct)
+router.delete("/:id", deleteProduct)
 
 module.exports = router;
