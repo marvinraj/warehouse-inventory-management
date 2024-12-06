@@ -67,8 +67,8 @@ const InventoryContent = () => {
                                     <td className='px-6 py-2'>{product.category}</td>
                                     <td className='px-6 py-2'>{product.price}</td>
                                     <td className='px-6 py-2'>
-                                        <button onClick={() => handleDelete(product.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
-                                        <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editproduct/${product.id}`}>Edit</Link></button>
+                                        <button onClick={() => handleDelete(product.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
+                                        <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editproduct/${product.id}`}>Edit</Link></button>
                                     </td>
                                 </tr>
                             ))}
