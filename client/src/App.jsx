@@ -8,6 +8,9 @@ import EditProduct from './pages/EditProduct'
 import Inbound from './pages/Inbound'
 import AddInbound from './pages/AddInbound'
 import EditInbound from './pages/EditInbound'
+import Outbound from './pages/Outbound'
+import AddOutbound from './pages/AddOutbound'
+import EditOutbound from './pages/EditOutbound'
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
       <Route path='/inbound' element={<Inbound/>}/>
       <Route path='/addpurchase' element={<AddInbound/>} />
       <Route path='/editpurchase/:id' element={<EditInbound/>} />
+      <Route path='/outbound' element={<Outbound/>}/>
+      <Route path='/addoutbound' element={<AddOutbound/>} />
+      <Route path='/editoutbound/:id' element={<EditOutbound/>} />
     </Routes>
       {/* <div className='main-page'>
         <Sidebar/>

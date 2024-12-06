@@ -15,12 +15,13 @@ const getAllOutbounds = (req,res) => {
     });
 };
 
-// add new inbound
+// add new outbound
 const addOutbound = (req,res) => {
-    const q = "INSERT INTO outbound (`product_id`,`supplier`,`quantity`,`date_shipped`) VALUES (?)"
+    const q = "INSERT INTO outbound (`product_id`, `product_name`, `customer`,`quantity`,`date_shipped`) VALUES (?)"
     const values = [
         req.body.product_id,
-        req.body.supplier,
+        req.body.product_name,
+        req.body.customer,
         req.body.quantity,
         req.body.date_shipped
     ]
@@ -35,4 +36,36 @@ const addOutbound = (req,res) => {
     });
 }
 
-module.exports = { getAllOutbounds, addOutbound }
+// logic to update a purchase
+const updateOutbound = (req,res) => {
+    // store sql query
+    const outboundID = req.params.id;
+    const q = "UPDATE outbound SET `product_id` = ?, `product_name` = ?,`customer` = ?,`quantity` = ?,`date_shipped` = ? WHERE id = ?";
+    const values = [
+        req.body.product_id,
+        req.body.product_name,
+        req.body.customer,
+        req.body.quantity,
+        req.body.date_shipped
+    ];
+    // send stored query to database
+    db.query(q, [...values, outboundID], (err,data) => {
+        if (err) return res.send(err);
+        return res.send("product has been updated successfully!!!!");
+    })
+};
+
+// update to delete a product
+const deleteOutbound = (req,res) => {
+    // store sql query
+    const outboundID = req.params.id;
+    const q = "DELETE FROM outbound WHERE id = ?";
+
+    // send stored query to database
+    db.query(q, [outboundID], (err,data) => {
+        if (err) return res.send(err);
+        return res.send("outbound has been deleted successfully!!!!");
+    })
+};
+
+module.exports = { getAllOutbounds, addOutbound, updateOutbound, deleteOutbound }
