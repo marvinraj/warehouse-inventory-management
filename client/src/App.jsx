@@ -5,6 +5,8 @@ import { Route, Routes } from 'react-router-dom'
 import Inventory from './pages/Inventory'
 import AddProduct from './pages/AddProduct'
 import EditProduct from './pages/EditProduct'
+import Inbound from './pages/Inbound'
+import AddInbound from './pages/AddInbound'
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Route path='/inventory' element={<Inventory/>} />
       <Route path='/addproduct' element={<AddProduct/>}/>
       <Route path='/editproduct/:id' element={<EditProduct/>}/>
+      <Route path='/inbound' element={<Inbound/>}/>
+      <Route path='/addpurchase' element={<AddInbound/>} />
     </Routes>
       {/* <div className='main-page'>
         <Sidebar/>

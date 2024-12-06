@@ -17,9 +17,10 @@ const getAllInbounds = (req,res) => {
 
 // add new inbound
 const addInbound = (req,res) => {
-    const q = "INSERT INTO inbound (`product_id`,`supplier`,`quantity`,`date_received`) VALUES (?)"
+    const q = "INSERT INTO inbound (`product_id`, `product_name`, `supplier`,`quantity`,`date_received`) VALUES (?)"
     const values = [
         req.body.product_id,
+        req.body.product_name,
         req.body.supplier,
         req.body.quantity,
         req.body.date_received
@@ -35,4 +36,17 @@ const addInbound = (req,res) => {
     });
 }
 
-module.exports = { getAllInbounds, addInbound }
+// update to delete a product
+const deleteInbound = (req,res) => {
+    // store sql query
+    const inboundID = req.params.id;
+    const q = "DELETE FROM inbound WHERE id = ?";
+
+    // send stored query to database
+    db.query(q, [inboundID], (err,data) => {
+        if (err) return res.send(err);
+        return res.send("inbound has been deleted successfully!!!!");
+    })
+};
+
+module.exports = { getAllInbounds, addInbound, deleteInbound }
