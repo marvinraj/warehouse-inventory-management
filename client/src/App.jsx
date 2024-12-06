@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar'
 import { Route, Routes } from 'react-router-dom'
 import Inventory from './pages/Inventory'
 import AddProduct from './pages/AddProduct'
+import EditProduct from './pages/EditProduct'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/" element={<Dashboard/>} />
       <Route path='/inventory' element={<Inventory/>} />
       <Route path='/addproduct' element={<AddProduct/>}/>
+      <Route path='/editproduct/:id' element={<EditProduct/>}/>
     </Routes>
       {/* <div className='main-page'>
         <Sidebar/>

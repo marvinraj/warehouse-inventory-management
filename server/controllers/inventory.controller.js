@@ -1,5 +1,6 @@
 const db = require('../config/db');
 
+// logic to get all products
 const getAllProducts = (req,res) => {
     // store sql query
     const q = "SELECT * FROM inventory"
@@ -13,6 +14,7 @@ const getAllProducts = (req,res) => {
     });
 };
 
+// logic to add a new product
 const addProduct = (req,res) => {
     // store sql query
     const q = "INSERT INTO inventory(`name`,`description`,`quantity`,`category`,`price`) VALUES (?)";
@@ -30,8 +32,26 @@ const addProduct = (req,res) => {
     });
 };
 
-const updateProduct = (req,res) => {}
+// logic to update a produc
+const updateProduct = (req,res) => {
+    // store sql query
+    const productID = req.params.id;
+    const q = "UPDATE inventory SET `name` = ?,`description` = ?,`quantity` = ?,`category` = ?,`price` = ? WHERE id = ?";
+    const values = [
+        req.body.name,
+        req.body.description,
+        req.body.quantity,
+        req.body.category,
+        req.body.price
+    ];
+    // send stored query to database
+    db.query(q, [...values, productID], (err,data) => {
+        if (err) return res.send(err);
+        return res.send("product has been deleted successfully!!!!");
+    })
+};
 
+// update to delete a product
 const deleteProduct = (req,res) => {
     // store sql query
     const productID = req.params.id;
@@ -40,7 +60,7 @@ const deleteProduct = (req,res) => {
     // send stored query to database
     db.query(q, [productID], (err,data) => {
         if (err) return res.send(err);
-        return res.send("product has been deleted successfully!!!!");
+        return res.send("product has been updated successfully!!!!");
     })
 };
 

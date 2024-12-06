@@ -10,7 +10,7 @@ router.get("/", getAllProducts);
 router.post("/", addProduct);
 
 // update an existing product
-router.put("/", updateProduct);
+router.put("/:id", updateProduct);
 
 // delete a product
 router.delete("/:id", deleteProduct)

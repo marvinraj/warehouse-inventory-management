@@ -14,12 +14,19 @@ const app = express(); // create express app
 const port = process.env.PORT || 5000; // store port from env variable
 
 // app.use(cors); // allows request from different origins
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-})
+// app.use(function (req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// })
 
+// middlewares
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");  // this is to allow all origins
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");  // this is to allow GET, POST, PUT, DELETE methods
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  // this is to allow specific headers
+    next();
+});
 app.use(express.urlencoded({extended: true}));
 app.use(express.json()) // parse the incoming requests with JSON payloads
 
