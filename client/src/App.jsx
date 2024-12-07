@@ -11,6 +11,7 @@ import EditInbound from './pages/EditInbound'
 import Outbound from './pages/Outbound'
 import AddOutbound from './pages/AddOutbound'
 import EditOutbound from './pages/EditOutbound'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path='/outbound' element={<Outbound/>}/>
       <Route path='/addoutbound' element={<AddOutbound/>} />
       <Route path='/editoutbound/:id' element={<EditOutbound/>} />
+      <Route path='/login' element={<LoginPage/>} />
     </Routes>
       {/* <div className='main-page'>
         <Sidebar/>
