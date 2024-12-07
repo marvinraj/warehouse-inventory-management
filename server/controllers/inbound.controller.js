@@ -2,17 +2,30 @@ const db = require('../config/db');
 
 // get all inbounds
 const getAllInbounds = (req,res) => {
+    const { search } = req.query; // Get the search query parameter
     // store sql query
-    const q = "SELECT * FROM inbound;"
-    // send stored query to database
-    db.query(q, (err, data) => {
-        if(err) {
-            return res.send("error occured")
-        }
-        else {
-            return res.send(data)
-        }
-    });
+    let q = "SELECT * FROM inbound;"
+
+    if (search) {
+        q = `SELECT * FROM inbound WHERE product_name LIKE ? OR supplier LIKE ?`;
+        db.query(q, [`%${search}%`, `%${search}%`], (err, data) => {
+            if (err) {
+                console.log(err);
+                return res.json(err);
+            }
+            return res.json(data);
+        });
+    } else {
+        // send stored query to database
+        db.query(q, (err, data) => {
+            if(err) {
+                return res.json(err)
+            }
+            else {
+                return res.json(data)
+            }
+        });
+    }
 };
 
 // add new inbound

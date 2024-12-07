@@ -13,7 +13,7 @@ const getAllProducts = (req,res) => {
                 console.log(err);
                 return res.json(err);
             }
-            return res.json(data);  // Return filtered products
+            return res.json(data);
         });
     } else {
         // send stored query to database
@@ -25,7 +25,6 @@ const getAllProducts = (req,res) => {
             return res.json(data);
         });
     }
-    
 };
 
 // logic to add a new product
