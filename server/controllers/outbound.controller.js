@@ -2,17 +2,30 @@ const db = require('../config/db');
 
 // get all outbound
 const getAllOutbounds = (req,res) => {
+    const { search } = req.query;
     // store sql query
-    const q = "SELECT * FROM outbound;"
-    // send stored query to database
-    db.query(q, (err, data) => {
-        if(err) {
-            return res.send("error occured")
-        }
-        else {
-            return res.send(data)
-        }
-    });
+    let q = "SELECT * FROM outbound;"
+
+    if (search) {
+        q = `SELECT * FROM outbound WHERE product_name LIKE ? OR customer LIKE ?`;
+        db.query(q, [`%${search}%`, `%${search}%`], (err, data) => {
+            if (err) {
+                console.log(err);
+                return res.json(err);
+            }
+            return res.json(data);
+        });
+    } else {
+        // send stored query to database
+        db.query(q, (err, data) => {
+            if(err) {
+                return res.json(err)
+            }
+            else {
+                return res.json(data)
+            }
+        });
+    }
 };
 
 // add new outbound

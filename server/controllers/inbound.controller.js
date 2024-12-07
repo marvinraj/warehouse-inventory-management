@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 // get all inbounds
 const getAllInbounds = (req,res) => {
-    const { search } = req.query; // Get the search query parameter
+    const { search } = req.query;
     // store sql query
     let q = "SELECT * FROM inbound;"
 
