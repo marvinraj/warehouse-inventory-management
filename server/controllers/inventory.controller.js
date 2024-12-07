@@ -2,16 +2,30 @@ const db = require('../config/db');
 
 // logic to get all products
 const getAllProducts = (req,res) => {
+    const { search } = req.query; // Get the search query parameter
     // store sql query
-    const q = "SELECT * FROM inventory"
-    // send stored query to database
-    db.query(q, (err, data) => {
-        if (err) {
-          console.log(err);
-          return res.json(err);
-        }
-        return res.json(data);
-    });
+    let q = "SELECT * FROM inventory"
+
+    if (search) {
+        q = `SELECT * FROM inventory WHERE name LIKE ? OR category LIKE ? OR description LIKE ?`;
+        db.query(q, [`%${search}%`, `%${search}%`, `%${search}%`], (err, data) => {
+            if (err) {
+                console.log(err);
+                return res.json(err);
+            }
+            return res.json(data);  // Return filtered products
+        });
+    } else {
+        // send stored query to database
+        db.query(q, (err, data) => {
+            if (err) {
+            console.log(err);
+            return res.json(err);
+            }
+            return res.json(data);
+        });
+    }
+    
 };
 
 // logic to add a new product

@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 const InventoryContent = () => {
 
     const [products, setProducts] = useState([])
-
+    const [search, setSearch] = useState('')
     // fetch all products
     useEffect(() => {
         const fetchAllProducts = async () => {
             try{
-                const res = await axios.get("http://localhost:5000/api/inventory/")
+                const res = await axios.get(`http://localhost:5000/api/inventory/?search=${search}`)
                 setProducts(res.data);
                 console.log(res)
             } catch (err){
@@ -19,8 +19,9 @@ const InventoryContent = () => {
             }
         }
         fetchAllProducts()
-    }, [])
+    }, [search])
 
+    // handle delete product
     const handleDelete = async (id) => {
         try{
             await axios.delete("http://localhost:5000/api/inventory/"+id)
@@ -29,6 +30,17 @@ const InventoryContent = () => {
             console.log(err)
         }
     }
+
+    // handle search input change
+    const handleSearchChange = (e) => {
+        setSearch(e.target.value);
+    };
+
+    // handle search button click (use later)
+    // const handleSearchClick = () => {
+    //     // Trigger product fetch based on the current search term
+    //     setSearch(search);
+    // };
 
 
     return (
@@ -39,9 +51,22 @@ const InventoryContent = () => {
             <div className='inventory-content ml-64 px-8 mt-5'>
                 {/* inventory title */}
                 <h1 className='text-2xl font-bold'>INVENTORY</h1>
-                <div className="search-bar add-button flex justify-between">
-                    <h3>search bar</h3>
-                    <button className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'><Link to="/addproduct">Add New Product</Link></button>
+                <div className="search-bar add-button flex justify-between mt-4">
+                    {/* search bar */}
+                    <div className='w-1/2 flex justify-end items-center relative'>
+                        <input type="text" onChange={handleSearchChange} placeholder="Search by name, category, or description" name='product_id' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5" />
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke-width="1.5" 
+                            stroke="currentColor" 
+                            class="absolute mr-2 w-5 text-slate-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                    </div>
+                    {/* add product button */}
+                    <button className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'><Link to="/addproduct">Add New Product</Link></button>
                 </div>
                 {/* inventory items */}
                 <div className="products mt-5">
