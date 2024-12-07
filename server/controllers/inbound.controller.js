@@ -17,21 +17,32 @@ const getAllInbounds = (req,res) => {
 
 // add new inbound
 const addInbound = (req,res) => {
+    const { product_id, product_name, supplier, quantity, date_received } = req.body;
     const q = "INSERT INTO inbound (`product_id`, `product_name`, `supplier`,`quantity`,`date_received`) VALUES (?)"
+    const updateInventory = "UPDATE inventory SET `quantity` = `quantity` + ? WHERE id = ?"
     const values = [
-        req.body.product_id,
-        req.body.product_name,
-        req.body.supplier,
-        req.body.quantity,
-        req.body.date_received
+        product_id,
+        product_name,
+        supplier,
+        quantity,
+        date_received
     ]
 
+    // add new inbound record
     db.query(q, [values], (err,data) => {
         if(err) {
             return res.json(err)
         }
         else {
-            return res.json(data)
+            // update the inventory
+            db.query(updateInventory, [quantity, product_id], (err, data) =>{
+                if (err) {
+                    return res.json(err)
+                }
+                else{
+                    return res.json(data)
+                }
+            })
         }
     });
 }
