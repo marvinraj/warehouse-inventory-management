@@ -75,7 +75,7 @@ const InventoryContent = () => {
                         </svg>
                     </div>
                     {/* add product button */}
-                    <button className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'><Link to="/addproduct">Add New Product</Link></button>
+                    <button className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'><Link to="/addproduct">Add New Product</Link></button>
                 </div>
                 {/* inventory items */}
                 <div className="products mt-5">
@@ -102,7 +102,7 @@ const InventoryContent = () => {
                                     <td className='px-6 py-2'>{product.price}</td>
                                     <td className='px-6 py-2'>
                                         <button onClick={() => handleDeleteClick(product.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
-                                        <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editproduct/${product.id}`}>Edit</Link></button>
+                                        <button type="button" class="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-green-300 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editproduct/${product.id}`}>Edit</Link></button>
                                     </td>
                                 </tr>
                             ))}
