@@ -1,69 +1,96 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar';
 
 const DashboardContent = () => {
-    const username = localStorage.getItem('username')
-    const topCards = [
-        {
-            title: 'Noteworthy technology acquisitions 2021',
-            description: 'Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.',
-            link: '#'
-        },
-        {
-            title: 'Inventory Update',
-            description: 'Track the latest updates in your inventory, including recent additions and low-stock alerts.',
-            link: '#'
-        },
-        {
-            title: 'Sales Insights',
-            description: 'View detailed insights into your sales performance and revenue trends.',
-            link: '#'
-        }
-    ];
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const username = localStorage.getItem('username') || 'User'; // Replace 'username' if different
 
-    const bottomCard = {
-        title: 'Detailed Warehouse Overview',
-        description: 'Get a comprehensive overview of your warehouse, including inventory, sales, and inbound shipments in one place.',
-        link: '#'
-    };
+  useEffect(() => {
+    const intervalID = setInterval(() => {
+      setCurrentDate(new Date());
+    }, 1000);
+    return () => clearInterval(intervalID);
+  }, []);
 
     return (
         <div>
             <Navbar />
-            <div className="dashboard-content ml-64 px-8 mt-5">
-                <div className="header">
-                    <h1 className="text-3xl font-bold">Welcome back, <span>{username}</span>!</h1>
-                    <p className="text-xs mt-3">Let's check on the warehouse.</p>
+            <div className="dashboard-container bg-gray-100 min-h-screen ml-64 px-8 py-8">
+                {/* Header */}
+                <h1 className='text-3xl font-bold mb-6'>Welcome back, {username}!</h1>
+
+                {/* Metrics Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Key Metric Cards */}
+                    <div className="bg-white shadow-md p-6 rounded-lg">
+                        <h2 className="text-lg font-semibold mb-2">Total Products</h2>
+                        <p className="text-4xl font-bold text-indigo-700">218</p>
+                        <p className="text-green-500 text-sm pt-2">+6% vs last month</p>
+                    </div>
+
+                    <div className="bg-white shadow-md p-6 rounded-lg">
+                        <h2 className="text-lg font-semibold mb-2">Low Stock Products</h2>
+                        <p className="text-4xl font-bold text-indigo-700">48</p>
+                        <p className="text-green-500 text-sm pt-2">+6% vs last month</p>
+                    </div>
+
+                    <div className="bg-white shadow-md p-6 rounded-lg">
+                        <h2 className="text-lg font-semibold mb-2">Inbounds Record Today</h2>
+                        <p className="text-4xl font-bold text-indigo-700">16</p>
+                        <p className="text-green-500 text-sm pt-2">+2% vs yesterday</p>
+                    </div>
+
+                    <div className="bg-white shadow-md p-6 rounded-lg">
+                        <h2 className="text-lg font-semibold mb-2">Outbounds Record Today</h2>
+                        <p className="text-4xl font-bold text-indigo-700">12</p>
+                        <p className="text-green-500 text-sm pt-2">+8% vs yesterday</p>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-                    {/* Top row of cards */}
-                    {topCards.map((card, index) => (
-                        <a
-                            href={card.link}
-                            key={index}
-                            className="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                        >
-                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                {card.title}
-                            </h5>
-                            <p className="font-normal text-gray-700 dark:text-gray-400">
-                                {card.description}
-                            </p>
-                        </a>
-                    ))}
+                {/* Chart and Schedule Section */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                    {/* Chart Section */}
+                    <div className="bg-white shadow-md p-6 rounded-lg col-span-2">
+                        <h2 className="text-lg font-semibold mb-4">Inbound Trends</h2>
+                        {/* Replace with a chart library like Chart.js or Recharts */}
+                        <div className="h-64 bg-gray-100 flex items-center justify-center">
+                            <p className="text-gray-400">Chart Loading....</p>
+                        </div>
+                    </div>
 
-                    <a
-                        href={bottomCard.link}
-                        className="block col-span-1 sm:col-span-2 lg:col-span-2 lg:row-span-2 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                    >
-                        <h5 className="mb-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            {bottomCard.title}
-                        </h5>
-                        <p className="font-normal text-gray-700 dark:text-gray-400">
-                            {bottomCard.description}
-                        </p>
-                    </a>
+                    {/* Schedule Section */}
+                    <div className="bg-white shadow-md p-6 rounded-lg">
+                        <h2 className="text-lg font-semibold mb-4">Recent Inbound/Outbound Tasks</h2>
+                        <div className="space-y-4">
+                            <div>
+                                <p className="text-sm text-gray-500">Inbound Record #123</p>
+                                <p className="font-semibold">Received shipment of 50 items</p>
+                                <p className="text-sm text-gray-400">Completed by admin1</p>
+                            </div>
+                            <div>
+                                <p className="text-sm text-gray-500">Outbound Record #456</p>
+                                <p className="font-semibold">Shipped order of 30 items</p>
+                                <p className="text-sm text-gray-400">Completed by admin2</p>
+                            </div>
+                            <div>
+                                <p className="text-sm text-gray-500">Inbound Record #23</p>
+                                <p className="font-semibold">Received shipment of 20 items</p>
+                                <p className="text-sm text-gray-400">Completed by admin3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Additional Metrics Section */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                    <div className="bg-white shadow-md p-6 rounded-lg">
+                        <h2 className="text-lg font-semibold mb-4">Total Customers</h2>
+                        <p className="text-4xl font-bold text-indigo-700">324</p>
+                    </div>
+                    <div className="bg-white shadow-md p-6 rounded-lg">
+                        <h2 className="text-lg font-semibold mb-4">Total Suppliers</h2>
+                        <p className="text-4xl font-bold text-indigo-700">72</p>
+                    </div>
                 </div>
             </div>
         </div>

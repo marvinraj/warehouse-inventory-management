@@ -21,7 +21,7 @@ const Sidebar = () => {
                 <a className='text-xl font-bold inline-block font-mono'>STAMPEDE<span className='text-indigo-400 italic text-2xl'>360</span></a>
             </div>
             {/* MENU */}
-            <ul className='text-base font-normal text-gray-400 mt-8 tracking-wide'>
+            <ul className='text-base font-mono font-normal text-gray-400 mt-8 tracking-wide'>
                 <li className={`${location.pathname === '/dashboard' ? 'bg-gradient-to-r from-indigo-500 text-indigo-200' : 'hover:bg-gradient-to-r from-indigo-800'}`}>
                     <Link to="/dashboard" className='block w-full h-full py-4 px-6'>
                         <svg 
