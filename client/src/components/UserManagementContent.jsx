@@ -86,7 +86,7 @@ const UserManagement = () => {
                 <div className="search-bar add-button flex justify-between mt-4">
                     {/* search bar */}
                     <div className="w-1/2 flex justify-end items-center relative">
-                        <input type="text" onChange={handleSearchChange} placeholder="Search by username or role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"/>
+                        <input type="text" onChange={handleSearchChange} placeholder="Search by username or role" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"/>
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" 
@@ -98,7 +98,7 @@ const UserManagement = () => {
                         </svg>
                     </div>
                     {/* add user button */}
-                    <button className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5" onClick={() => openModal('add')}>
+                    <button className="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5" onClick={() => openModal('add')}>
                         Add New User
                     </button>
                 </div>
@@ -120,8 +120,8 @@ const UserManagement = () => {
                                     <td className="px-6 py-2">{user.username}</td>
                                     <td className="px-6 py-2">{user.role}</td>
                                     <td className="px-6 py-2">
-                                        <button onClick={() => openModal('edit', user)} className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-green-300 font-semibold rounded-lg text-xs px-5 py-2 me-2 mb-2">Edit</button>
-                                        <button onClick={() => handleDelete(user.id)} className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-semibold rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
+                                        <button onClick={() => openModal('edit', user)} className="text-white bg-yellow-500 hover:bg-yellow-600 font-semibold rounded-lg text-xs px-5 py-2 me-2 mb-2">Edit</button>
+                                        <button onClick={() => handleDelete(user.id)} className="text-white bg-red-700 hover:bg-red-800 font-semibold rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
                                     </td>
                                 </tr>
                             ))}

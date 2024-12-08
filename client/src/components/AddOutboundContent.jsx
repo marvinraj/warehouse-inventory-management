@@ -54,27 +54,27 @@ const AddOutboundContent = () => {
                 <form class="max-w-sm"> 
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Product ID</label>
-                        <input type="text" placeholder="type in id" onChange={handleChange} name='product_id' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                        <input type="text" placeholder="type in id" onChange={handleChange} name='product_id' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Product Name</label>
-                        <input type="text" placeholder="type in name" onChange={handleChange} name='product_name' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                        <input type="text" placeholder="type in name" onChange={handleChange} name='product_name' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "/>
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Product Name</label>
-                        <input type="text" placeholder="type in supplier" onChange={handleChange} name='customer' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Supplier</label>
+                        <input type="text" placeholder="type in supplier" onChange={handleChange} name='customer' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lgblock w-full p-2.5 "/>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Quantity</label>
-                        <input type="number" placeholder="type in quantity" onChange={handleChange} name='quantity' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                        <input type="number" placeholder="type in quantity" onChange={handleChange} name='quantity' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "/>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Date Shipped</label>
-                        <input type="date" placeholder="type in date received" onChange={handleChange} name='date_shipped' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                        <input type="date" placeholder="type in date received" onChange={handleChange} name='date_shipped' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "/>
                     </div>
                     {/* button */}
-                    <button class="mr-2 text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"><Link to="/outbound">Cancel</Link></button>
-                    <button onClick={handleClick} class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add</button>
+                    <button class="mr-2 text-white bg-red-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"><Link to="/outbound">Cancel</Link></button>
+                    <button onClick={handleClick} class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add</button>
                 </form>
             </div>
             {/* message modal */}

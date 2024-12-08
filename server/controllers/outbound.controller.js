@@ -31,7 +31,6 @@ const getAllOutbounds = (req,res) => {
 // logic to add new outbound
 const addOutbound = (req, res) => {
     const { product_id, product_name, customer, quantity, date_shipped } = req.body;
-
     const insertOutbound = `INSERT INTO outbound (product_id, product_name, customer, quantity, date_shipped) VALUES (?, ?, ?, ?, ?)`;
     const checkInventory = "SELECT quantity FROM inventory WHERE id = ?";
     const updateInventory = "UPDATE inventory SET quantity = quantity - ? WHERE id = ?";
@@ -42,19 +41,16 @@ const addOutbound = (req, res) => {
             console.error("Error checking inventory:", err);
             return res.status(500).json({ error: "Error checking inventory." });
         }
-
         if (data.length === 0) {
             // product does not exist in inventory
             return res.status(404).json({ error: "Product does not exist in inventory." });
         }
 
         const currentQuantity = data[0].quantity;
-
         if (currentQuantity < quantity) {
             // insufficient inventory
             return res.status(400).json({ error: "Insufficient quantity in inventory." });
         }
-
         // add outbound record and update inventory
         db.query(insertOutbound, [product_id, product_name, customer, quantity, date_shipped], (err) => {
             if (err) {
@@ -97,7 +93,6 @@ const deleteOutbound = (req,res) => {
     // store sql query
     const outboundID = req.params.id;
     const q = "DELETE FROM outbound WHERE id = ?";
-
     // send stored query to database
     db.query(q, [outboundID], (err,data) => {
         if (err) return res.send(err);

@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 // logic to get all products
 const getAllProducts = (req,res) => {
-    const { search } = req.query; // Get the search query parameter
+    const { search } = req.query;
     // store sql query
     let q = "SELECT * FROM inventory"
 

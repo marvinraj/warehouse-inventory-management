@@ -9,7 +9,6 @@ const getAuth = (req, res) => {
         if (err) {
             return res.status(500).json({ error: "database error" });
         }
-
         if (data.length > 0) {
             res.status(200).json(data);
         } else {

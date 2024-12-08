@@ -46,27 +46,27 @@ const AddProductContent = () => {
                 <form class="max-w-sm"> 
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Product Name</label>
-                        <input type="text" placeholder="type in name" onChange={handleChange} name='name' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                        <input type="text" placeholder="type in name" onChange={handleChange} name='name' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Product Description</label>
-                        <input type="text" placeholder="type in description" onChange={handleChange} name='description' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                        <input type="text" placeholder="type in description" onChange={handleChange} name='description' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "/>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Quantity</label>
-                        <input type="number" placeholder="type in quantity" onChange={handleChange} name='quantity' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                        <input type="number" placeholder="type in quantity" onChange={handleChange} name='quantity' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "/>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Category</label>
-                        <input type="text" placeholder="type in category" onChange={handleChange} name='category' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                        <input type="text" placeholder="type in category" onChange={handleChange} name='category' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "/>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                        <input type="number" placeholder="type in title" onChange={handleChange} name='price' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                        <input type="number" placeholder="type in title" onChange={handleChange} name='price' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "/>
                     </div>
                     {/* button */}
                     <button class="mr-2 text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"><Link to="/inventory">Cancel</Link></button>
-                    <button onClick={handleClick} class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add</button>
+                    <button onClick={handleClick} class="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add</button>
                 </form>
             </div>
         </div>

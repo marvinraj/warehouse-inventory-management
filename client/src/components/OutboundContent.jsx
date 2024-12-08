@@ -41,7 +41,7 @@ const OutboundContent = () => {
         }
     }
 
-    // handle delete click (open modal)
+    // handle delete click 
     const handleDeleteClick = (id) => {
         setOutboundsToDelete(id); // set the product to delete
         setShowModal(true); // show the modal
@@ -73,7 +73,7 @@ const OutboundContent = () => {
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                     </div>
-                    <button className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'><Link to="/addoutbound">Add New Outbound</Link></button>
+                    <button className='text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'><Link to="/addoutbound">Add New Outbound</Link></button>
                 </div>
                 {/* outbound items */}
                 <div className="outbounds mt-5">
@@ -99,8 +99,8 @@ const OutboundContent = () => {
                                     <td className='px-6 py-2'>{outbound.quantity}</td>
                                     <td className='px-6 py-2'>{formatDate(outbound.date_shipped)}</td>
                                     <td className='px-6 py-2'>
-                                        <button onClick={() => handleDeleteClick(outbound.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
-                                        <button type="button" class="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-green-300 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editoutbound/${outbound.id}`}>Edit</Link></button>
+                                        <button onClick={() => handleDeleteClick(outbound.id)} type="button" class="text-white bg-red-700 hover:bg-red-800 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
+                                        <button type="button" class="text-white bg-yellow-500 hover:bg-yellow-600 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editoutbound/${outbound.id}`}>Edit</Link></button>
                                     </td>
                                 </tr>
                             ))}
@@ -108,7 +108,7 @@ const OutboundContent = () => {
                     </table>
                 </div>
             </div>
-            {/* Modal */}
+            {/* modal */}
             <ConfirmationModal
                 showModal={showModal}
                 setShowModal={setShowModal}
