@@ -21,7 +21,7 @@ const EditInboundContent = () => {
     // handle change in value
     const handleChange = (e) => {
         const { name, value } = e.target;
-        const formattedValue = name === 'date_shipped' ? formatDate(value) : value;
+        const formattedValue = name === 'date_received' ? formatDate(value) : value;
 
         setPurchase((prev) => ({ ...prev, [name]: formattedValue }));
     };

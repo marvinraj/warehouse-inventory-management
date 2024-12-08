@@ -28,37 +28,50 @@ const getAllOutbounds = (req,res) => {
     }
 };
 
-// add new outbound
-const addOutbound = (req,res) => {
+// logic to add new outbound
+const addOutbound = (req, res) => {
     const { product_id, product_name, customer, quantity, date_shipped } = req.body;
-    const q = "INSERT INTO outbound (`product_id`, `product_name`, `customer`,`quantity`,`date_shipped`) VALUES (?)"
-    const updateInventory = "UPDATE inventory SET `quantity` = `quantity` - ? WHERE id = ?"
-    const values = [
-        product_id,
-        product_name,
-        customer,
-        quantity,
-        date_shipped
-    ]
-    
-    // add new inbound record
-    db.query(q, [values], (err,data) => {
-        if(err) {
-            return res.json(err)
+
+    const insertOutbound = `INSERT INTO outbound (product_id, product_name, customer, quantity, date_shipped) VALUES (?, ?, ?, ?, ?)`;
+    const checkInventory = "SELECT quantity FROM inventory WHERE id = ?";
+    const updateInventory = "UPDATE inventory SET quantity = quantity - ? WHERE id = ?";
+
+    // check if product exists and if there are suffienciet quantity in inventory
+    db.query(checkInventory, [product_id], (err, result) => {
+        if (err) {
+            console.error("Error checking inventory:", err);
+            return res.status(500).json({ error: "Error checking inventory." });
         }
-        else {
-            // update the inventory
-            db.query(updateInventory, [quantity, product_id], (err, data) =>{
+
+        if (result.length === 0) {
+            // product does not exist in inventory
+            return res.status(404).json({ error: "Product does not exist in inventory." });
+        }
+
+        const currentQuantity = result[0].quantity;
+
+        if (currentQuantity < quantity) {
+            // insufficient inventory
+            return res.status(400).json({ error: "Insufficient quantity in inventory." });
+        }
+
+        // add outbound record and update inventory
+        db.query(insertOutbound, [product_id, product_name, customer, quantity, date_shipped], (err) => {
+            if (err) {
+                console.error("Error inserting outbound record:", err);
+                return res.status(500).json({ error: "Error inserting outbound record." });
+            }
+            db.query(updateInventory, [quantity, product_id], (err) => {
                 if (err) {
-                    return res.json(err)
+                    console.error("Error updating inventory:", err);
+                    return res.status(500).json({ error: "Error updating inventory." });
                 }
-                else{
-                    return res.json(data)
-                }
-            })
-        }
+                return res.status(200).json({ message: "Outbound added and inventory updated successfully." });
+            });
+        });
     });
-}
+};
+
 
 // logic to update a purchase
 const updateOutbound = (req,res) => {

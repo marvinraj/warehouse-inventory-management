@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { formatDate } from '../utility/utils';
+import MessageModal from './MessageModal';
 
 const AddOutboundContent = () => {
     const [outbound, setOutbound] = useState({
@@ -16,22 +17,29 @@ const AddOutboundContent = () => {
 
     const navigate = useNavigate()
 
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+
     // handle change in value
     const handleChange = (e) => {
         const { name, value } = e.target;
         const formattedValue = name === 'date_shipped' ? formatDate(value) : value;
-
         setOutbound((prev) => ({ ...prev, [name]: formattedValue }));
     };
 
     // handles adding outbound button
     const handleClick = async (e) => {
         e.preventDefault();
-        try{
+        try {
             await axios.post("http://localhost:5000/api/outbound/", outbound);
-            navigate("/outbound")
-        }catch(err) {
-            console.log("error in handleClick lol")
+            navigate("/outbound"); // Navigate to the outbound page on success
+        } catch (err) {
+            // Safely extract error message from the response
+            const errorMessage =
+                err.response?.data?.error || // Server returned a specific error message
+                "An error occurred while adding the outbound record."; // Fallback message
+            setModalMessage(errorMessage); // Set modal message
+            setModalVisible(true); // Show the modal
         }
     };
 
@@ -72,6 +80,13 @@ const AddOutboundContent = () => {
                     <button onClick={handleClick} class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add</button>
                 </form>
             </div>
+            {/* Message Modal */}
+            <MessageModal
+                show={modalVisible}
+                title="Error"
+                message={modalMessage}
+                onClose={() => setModalVisible(false)}
+            />
         </div>
     )
 }

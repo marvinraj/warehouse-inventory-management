@@ -8,16 +8,10 @@ const ConfirmationModal = ({ showModal, setShowModal, onConfirm }) => {
                     <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
                         <h2 className="text-lg font-bold">Are you sure you want to delete this product?</h2>
                         <div className="mt-4 flex justify-end space-x-4">
-                            <button
-                                className="bg-red-500 text-white px-4 py-2 rounded-lg"
-                                onClick={onConfirm} // Trigger the confirm callback
-                            >
+                            <button className="bg-red-500 text-white px-4 py-2 rounded-lg" onClick={onConfirm}>
                                 Yes, Delete
                             </button>
-                            <button
-                                className="bg-gray-500 text-white px-4 py-2 rounded-lg"
-                                onClick={() => setShowModal(false)} // Close the modal
-                            >
+                            <button className="bg-gray-500 text-white px-4 py-2 rounded-lg" onClick={() => setShowModal(false)}>
                                 Cancel
                             </button>
                         </div>
