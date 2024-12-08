@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './Navbar';
 
 const DashboardContent = () => {
+    const username = localStorage.getItem('username')
     const topCards = [
         {
             title: 'Noteworthy technology acquisitions 2021',
@@ -31,7 +32,7 @@ const DashboardContent = () => {
             <Navbar />
             <div className="dashboard-content ml-64 px-8 mt-5">
                 <div className="header">
-                    <h1 className="text-3xl font-bold">Welcome back, Marvin!</h1>
+                    <h1 className="text-3xl font-bold">Welcome back, <span>{username}</span>!</h1>
                     <p className="text-xs mt-3">Let's check on the warehouse.</p>
                 </div>
 
