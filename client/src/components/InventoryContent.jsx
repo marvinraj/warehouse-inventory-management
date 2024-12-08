@@ -3,13 +3,16 @@ import Navbar from './Navbar'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ConfirmationModal from './ConfirmationModal'
+import RestrictedModal from './RestrictedModal'
 
 const InventoryContent = () => {
-
     const [products, setProducts] = useState([])
     const [search, setSearch] = useState('')
     const [showModal, setShowModal] = useState(false);
+    const [showRestrictedModal, setShowRestrictedModal] = useState(false);
+    const [restrictedMessage, setRestrictedMessage] = useState('');
     const [productToDelete, setProductToDelete] = useState(null);
+    const role = localStorage.getItem('role');
 
     // fetch all products
     useEffect(() => {
@@ -41,10 +44,30 @@ const InventoryContent = () => {
         }
     }
 
-    // handle delete click (open modal)
+    // handle delete click
     const handleDeleteClick = (id) => {
-        setProductToDelete(id); // set the product to delete
-        setShowModal(true); // show the modal
+        if (role === 'operator') {
+            setRestrictedMessage('STOP!!! Operators are not allowed to delete products.');
+            setShowRestrictedModal(true);
+        } else{
+            setProductToDelete(id); // set the product to delete
+            setShowModal(true); // show the modal   
+        }
+    };
+    // handle edit click
+    const handleEditClick = () => {
+        if (role === 'operator') {
+            setRestrictedMessage('STOP!!! Operators are not allowed to edit products.');
+            setShowRestrictedModal(true); // Show restriction modal
+        }
+    };
+    // handle add click
+    const handleAddProductClick = (e) => {
+        if (role === 'operator') {
+            e.preventDefault(); // Prevent navigation
+            setRestrictedMessage('STOP!!! Operators are not allowed to add products.');
+            setShowRestrictedModal(true); // Show restriction modal
+        }
     };
 
     // handle search input change
@@ -75,9 +98,9 @@ const InventoryContent = () => {
                         </svg>
                     </div>
                     {/* add product button */}
-                    <button className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'><Link to="/addproduct">Add New Product</Link></button>
+                    <button onClick={handleAddProductClick} className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'><Link to={role !== 'operator' ? `/addproduct` : "#"}>Add New Product</Link></button>
                 </div>
-                {/* inventory items */}
+                {/* inventory items in table */}
                 <div className="products mt-5">
                     <table className='w-full text-sm text-left rtl:text-right text-gray-800'>
                         <thead className='text-xs text-gray-700 uppercase bg-gray-100'>
@@ -102,7 +125,7 @@ const InventoryContent = () => {
                                     <td className='px-6 py-2'>{product.price}</td>
                                     <td className='px-6 py-2'>
                                         <button onClick={() => handleDeleteClick(product.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
-                                        <button type="button" class="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-green-300 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editproduct/${product.id}`}>Edit</Link></button>
+                                        <button onClick={handleEditClick} type="button" class="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-green-300 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={role !== 'operator' ? `/editproduct/${product.id}` : "#"}>Edit</Link></button>
                                     </td>
                                 </tr>
                             ))}
@@ -110,12 +133,10 @@ const InventoryContent = () => {
                     </table>
                 </div>
             </div>
-            {/* Modal */}
-            <ConfirmationModal
-                showModal={showModal}
-                setShowModal={setShowModal}
-                onConfirm={handleDelete}
-            />
+            {/* restricted modal */}
+            <RestrictedModal show={showRestrictedModal} onClose={() => setShowRestrictedModal(false)} message={restrictedMessage}/>
+            {/* confirmation modal */}
+            <ConfirmationModal showModal={showModal} setShowModal={setShowModal} onConfirm={handleDelete}/>
         </div>
     )
 }

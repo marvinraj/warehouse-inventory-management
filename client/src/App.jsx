@@ -17,7 +17,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path="/" element={<Dashboard/>} />
+      <Route path="/dashboard" element={<Dashboard/>} />
       <Route path='/inventory' element={<Inventory/>} />
       <Route path='/addproduct' element={<AddProduct/>}/>
       <Route path='/editproduct/:id' element={<EditProduct/>}/>

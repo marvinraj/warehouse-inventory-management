@@ -32,14 +32,11 @@ const AddOutboundContent = () => {
         e.preventDefault();
         try {
             await axios.post("http://localhost:5000/api/outbound/", outbound);
-            navigate("/outbound"); // Navigate to the outbound page on success
+            navigate("/outbound");
         } catch (err) {
-            // Safely extract error message from the response
-            const errorMessage =
-                err.response?.data?.error || // Server returned a specific error message
-                "An error occurred while adding the outbound record."; // Fallback message
-            setModalMessage(errorMessage); // Set modal message
-            setModalVisible(true); // Show the modal
+            const errorMessage = err.response?.data?.error || "error occurred while adding the outbound record";
+            setModalMessage(errorMessage);
+            setModalVisible(true);
         }
     };
 
@@ -80,13 +77,8 @@ const AddOutboundContent = () => {
                     <button onClick={handleClick} class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add</button>
                 </form>
             </div>
-            {/* Message Modal */}
-            <MessageModal
-                show={modalVisible}
-                title="Error"
-                message={modalMessage}
-                onClose={() => setModalVisible(false)}
-            />
+            {/* message modal */}
+            <MessageModal show={modalVisible} title="Error" message={modalMessage} onClose={() => setModalVisible(false)}/>
         </div>
     )
 }
