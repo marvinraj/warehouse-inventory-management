@@ -6,7 +6,6 @@ import ConfirmationModal from './ConfirmationModal'
 import { formatDate } from '../utility/utils';
 
 const OutboundContent = () => {
-    
     const [outbounds, setOutbounds] = useState([])
     const [search, setSearch] = useState('')
     const [showModal, setShowModal] = useState(false);
@@ -60,7 +59,7 @@ const OutboundContent = () => {
             {/* outbound content */}
             <div className='outbound-content ml-64 px-8 mt-5'>
                 {/* outbound title */}
-                <h1 className='text-3xl font-bold'>SALES</h1>
+                <h1 className='text-2xl font-bold'>SALES</h1>
                 <div className="search-bar add-button flex justify-between mt-4">
                 <div className='w-1/2 flex justify-end items-center relative'>
                         <input type="text" onChange={handleSearchChange} placeholder="Search by product name, or customer" name='product_id' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5" />

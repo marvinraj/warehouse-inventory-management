@@ -60,7 +60,7 @@ const InboundContent = () => {
             {/* inbound content */}
             <div className='inventory-content ml-64 px-8 mt-5'>
                 {/* inbound title */}
-                <h1 className='text-3xl font-bold'>PURCHASES</h1>
+                <h1 className='text-2xl font-bold'>PURCHASES</h1>
                 <div className="search-bar add-button flex justify-between mt-4">
                     <div className='w-1/2 flex justify-end items-center relative'>
                         <input type="text" onChange={handleSearchChange} placeholder="Search by product name, or supplier" name='product_id' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5" />

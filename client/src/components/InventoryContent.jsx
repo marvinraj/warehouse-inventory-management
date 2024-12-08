@@ -82,7 +82,7 @@ const InventoryContent = () => {
             {/* inventory content */}
             <div className='inventory-content ml-64 px-8 mt-5'>
                 {/* inventory title */}
-                <h1 className='text-3xl font-bold'>INVENTORY</h1>
+                <h1 className='text-2xl font-bold'>INVENTORY</h1>
                 <div className="search-bar add-button flex justify-between mt-4">
                     {/* search bar */}
                     <div className='w-1/2 flex justify-end items-center relative'>

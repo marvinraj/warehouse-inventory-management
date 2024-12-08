@@ -6,6 +6,7 @@ const inventoryRoutes = require('./routes/inventory.route')
 const inBoundRoutes = require('./routes/inbound.route')
 const outBoundRoutes = require('./routes/outbound.route')
 const authRoutes = require('./routes/auth.route')
+const usersRoutes = require('./routes/users.route')
 const connectDB = require('./config/db')
 
 
@@ -41,7 +42,9 @@ app.use("/api/inbound", inBoundRoutes);
 // outbound route
 app.use("/api/outbound", outBoundRoutes);
 // login route
-app.use("/api/auth", authRoutes)
+app.use("/api/auth", authRoutes);
+// users route
+app.use("/api/users", usersRoutes);
 
 // test db connection
 connectDB.connect((err) => {

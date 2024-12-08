@@ -19,7 +19,7 @@ const Sidebar = () => {
                 <h1 className='text-xl font-bold inline-block'>STAMPEDE<span className='text-indigo-400 italic text-2xl'>360</span></h1>
             </div>
             {/* MENU */}
-            <ul className='text-base font-extralight text-gray-400 mt-8 tracking-wide'>
+            <ul className='text-base font-normal text-gray-400 mt-8 tracking-wide'>
                 <li className={`${location.pathname === '/dashboard' ? 'bg-gradient-to-r from-indigo-500 text-indigo-200' : 'hover:bg-gradient-to-r from-indigo-800'}`}>
                     <Link to="/dashboard" className='block w-full h-full py-4 px-6'>
                         <svg 
@@ -73,8 +73,8 @@ const Sidebar = () => {
                         Purchases
                     </Link>
                 </li>
-                <li className={`${location.pathname === '/#' ? 'bg-gradient-to-r from-indigo-500 text-indigo-200' : 'hover:bg-gradient-to-r from-indigo-800'}`}>
-                    <Link to="#" className='block w-full h-full py-4 px-6'>
+                <li className={`${location.pathname === '/users' ? 'bg-gradient-to-r from-indigo-500 text-indigo-200' : 'hover:bg-gradient-to-r from-indigo-800'}`}>
+                    <Link to="/users" className='block w-full h-full py-4 px-6'>
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" 

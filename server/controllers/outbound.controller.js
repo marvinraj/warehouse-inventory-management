@@ -37,18 +37,18 @@ const addOutbound = (req, res) => {
     const updateInventory = "UPDATE inventory SET quantity = quantity - ? WHERE id = ?";
 
     // check if product exists and if there are suffienciet quantity in inventory
-    db.query(checkInventory, [product_id], (err, result) => {
+    db.query(checkInventory, [product_id], (err, data) => {
         if (err) {
             console.error("Error checking inventory:", err);
             return res.status(500).json({ error: "Error checking inventory." });
         }
 
-        if (result.length === 0) {
+        if (data.length === 0) {
             // product does not exist in inventory
             return res.status(404).json({ error: "Product does not exist in inventory." });
         }
 
-        const currentQuantity = result[0].quantity;
+        const currentQuantity = data[0].quantity;
 
         if (currentQuantity < quantity) {
             // insufficient inventory
