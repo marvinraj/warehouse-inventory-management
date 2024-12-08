@@ -28,7 +28,7 @@ function App() {
       <Route path='/outbound' element={<Outbound/>}/>
       <Route path='/addoutbound' element={<AddOutbound/>} />
       <Route path='/editoutbound/:id' element={<EditOutbound/>} />
-      <Route path='/login' element={<LoginPage/>} />
+      <Route path='/' element={<LoginPage/>} />
       <Route path='/users' element={<UserManagement/>} />
     </Routes>
       {/* <div className='main-page'>
