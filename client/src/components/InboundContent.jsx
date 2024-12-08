@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ConfirmationModal from './ConfirmationModal'
+import { formatDate } from '../utility/utils';
 
 const InboundContent = () => {
     
@@ -97,7 +98,7 @@ const InboundContent = () => {
                                     <td className='px-6 py-2'>{purchase.product_name}</td>
                                     <td className='px-6 py-2'>{purchase.supplier}</td>
                                     <td className='px-6 py-2'>{purchase.quantity}</td>
-                                    <td className='px-6 py-2'>{purchase.date_received}</td>
+                                    <td className='px-6 py-2'>{formatDate(purchase.date_received)}</td>
                                     <td className='px-6 py-2'>
                                         <button onClick={() => handleDeleteClick(purchase.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
                                         <button type="button" class="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-green-300 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editpurchase/${purchase.id}`}>Edit</Link></button>

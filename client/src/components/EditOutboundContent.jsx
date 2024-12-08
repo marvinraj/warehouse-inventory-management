@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
+import { formatDate } from '../utility/utils';
 
 const EditOutboundContent = () => {
     const [outbound, setOutbound] = useState({
@@ -19,7 +20,10 @@ const EditOutboundContent = () => {
 
     // handle change in value
     const handleChange = (e) => {
-        setOutbound((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        const { name, value } = e.target;
+        const formattedValue = name === 'date_shipped' ? formatDate(value) : value;
+
+        setOutbound((prev) => ({ ...prev, [name]: formattedValue }));
     };
 
     // handles adding outBound button
@@ -64,7 +68,7 @@ const EditOutboundContent = () => {
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Date Shipped</label>
-                        <input type="text" placeholder="type in title" onChange={handleChange} name='date_shipped' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                        <input type="date" placeholder="type in title" onChange={handleChange} name='date_shipped' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
                     </div>
                     {/* button */}
                     <button class="mr-2 text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"><Link to="/outbound">Cancel</Link></button>

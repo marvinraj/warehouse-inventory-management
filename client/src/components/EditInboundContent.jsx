@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
+import { formatDate } from '../utility/utils';
 
 const EditInboundContent = () => {
     const [purchase, setPurchase] = useState({
@@ -19,7 +20,10 @@ const EditInboundContent = () => {
 
     // handle change in value
     const handleChange = (e) => {
-        setPurchase((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        const { name, value } = e.target;
+        const formattedValue = name === 'date_shipped' ? formatDate(value) : value;
+
+        setPurchase((prev) => ({ ...prev, [name]: formattedValue }));
     };
 
     // handles adding purchase button
