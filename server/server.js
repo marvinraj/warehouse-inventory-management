@@ -8,6 +8,7 @@ const outBoundRoutes = require('./routes/outbound.route')
 const authRoutes = require('./routes/auth.route')
 const usersRoutes = require('./routes/users.route')
 const connectDB = require('./config/db')
+const initDB = require('./config/initDB')
 
 
 require('dotenv').config(); // loads the env variables
@@ -52,6 +53,7 @@ connectDB.connect((err) => {
         console.log("error connecting to mysql");
     } else {
         console.log("successful connection with mysql!");
+        initDB();
     }
 })
 
