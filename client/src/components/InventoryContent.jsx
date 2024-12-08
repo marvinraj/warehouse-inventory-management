@@ -7,6 +7,9 @@ const InventoryContent = () => {
 
     const [products, setProducts] = useState([])
     const [search, setSearch] = useState('')
+    const [showModal, setShowModal] = useState(false); // Modal visibility
+    const [productToDelete, setProductToDelete] = useState(null); // Product ID to delete
+
     // fetch all products
     useEffect(() => {
         const fetchAllProducts = async () => {
@@ -24,12 +27,54 @@ const InventoryContent = () => {
     // handle delete product
     const handleDelete = async (id) => {
         try{
-            await axios.delete("http://localhost:5000/api/inventory/"+id)
-            window.location.reload()
+            console.log(`Deleting product with ID: ${productToDelete}`);
+            await axios.delete(`http://localhost:5000/api/inventory/${productToDelete}`);
+            setShowModal(false); // Close the modal
+            setProductToDelete(null); // Reset the product ID
+            // Reload the products list after deletion
+            const res = await axios.get(`http://localhost:5000/api/inventory/?search=${search}`);
+            setProducts(res.data);
+            console.log('Updated Products after delete:', res.data);
         } catch(err){
             console.log(err)
         }
     }
+
+    // Confirmation Modal Component
+    const ConfirmationModal = ({ showModal, setShowModal, productToDelete, onConfirm }) => {
+        return (
+            <>
+                {showModal && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                        <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+                            <h2 className="text-lg font-bold">Are you sure you want to delete this product?</h2>
+                            <div className="mt-4 flex justify-end space-x-4">
+                                <button
+                                    className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                                    onClick={() => onConfirm(productToDelete)}
+                                >
+                                    Yes, Delete
+                                </button>
+                                <button
+                                    className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+                                    onClick={() => setShowModal(false)}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </>
+        );
+    };
+
+
+    // handle delete click (open modal)
+    const handleDeleteClick = (id) => {
+        setProductToDelete(id); // Set the product to delete
+        setShowModal(true); // Show the modal
+    };
 
     // handle search input change
     const handleSearchChange = (e) => {
@@ -92,7 +137,7 @@ const InventoryContent = () => {
                                     <td className='px-6 py-2'>{product.category}</td>
                                     <td className='px-6 py-2'>{product.price}</td>
                                     <td className='px-6 py-2'>
-                                        <button onClick={() => handleDelete(product.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
+                                        <button onClick={() => handleDeleteClick(product.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
                                         <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editproduct/${product.id}`}>Edit</Link></button>
                                     </td>
                                 </tr>
@@ -101,6 +146,12 @@ const InventoryContent = () => {
                     </table>
                 </div>
             </div>
+            {/* Modal */}
+            <ConfirmationModal
+                showModal={showModal}
+                setShowModal={setShowModal}
+                onConfirm={handleDelete} // Handle delete confirmation
+            />
         </div>
     )
 }
