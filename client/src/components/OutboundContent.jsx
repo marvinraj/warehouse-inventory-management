@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import ConfirmationModal from './ConfirmationModal'
 
 const OutboundContent = () => {
     
     const [outbounds, setOutbounds] = useState([])
     const [search, setSearch] = useState('')
+    const [showModal, setShowModal] = useState(false);
+    const [outboundsToDelete, setOutboundsToDelete] = useState(null);
 
     // fetch all outbounds
     useEffect(() => {
@@ -22,14 +25,27 @@ const OutboundContent = () => {
         fetchAllOutbounds()
     }, [search])
 
+    // handle delete product
     const handleDelete = async (id) => {
         try{
-            await axios.delete("http://localhost:5000/api/outbound/"+id)
-            window.location.reload()
+            console.log(`Deleting outbounds with ID: ${outboundsToDelete}`);
+            await axios.delete(`http://localhost:5000/api/outbound/${outboundsToDelete}`);
+            setShowModal(false); // close the modal
+            setOutboundsToDelete(null); // reset the product ID
+            // reload the products list after deletion
+            const res = await axios.get(`http://localhost:5000/api/outbound/?search=${search}`);
+            setOutbounds(res.data);
+            console.log('Updated outbounds after delete:', res.data);
         } catch(err){
             console.log(err)
         }
     }
+
+    // handle delete click (open modal)
+    const handleDeleteClick = (id) => {
+        setOutboundsToDelete(id); // set the product to delete
+        setShowModal(true); // show the modal
+    };
 
     // handle search input change
     const handleSearchChange = (e) => {
@@ -43,7 +59,7 @@ const OutboundContent = () => {
             {/* outbound content */}
             <div className='outbound-content ml-64 px-8 mt-5'>
                 {/* outbound title */}
-                <h1 className='text-2xl font-bold'>SALES</h1>
+                <h1 className='text-3xl font-bold'>SALES</h1>
                 <div className="search-bar add-button flex justify-between mt-4">
                 <div className='w-1/2 flex justify-end items-center relative'>
                         <input type="text" onChange={handleSearchChange} placeholder="Search by product name, or customer" name='product_id' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5" />
@@ -83,7 +99,7 @@ const OutboundContent = () => {
                                     <td className='px-6 py-2'>{outbound.quantity}</td>
                                     <td className='px-6 py-2'>{outbound.date_shipped}</td>
                                     <td className='px-6 py-2'>
-                                        <button onClick={() => handleDelete(outbound.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
+                                        <button onClick={() => handleDeleteClick(outbound.id)} type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-thin rounded-lg text-xs px-4 py-2 me-2 mb-2">Delete</button>
                                         <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-thin rounded-lg text-xs px-5 py-2 me-2 mb-2"><Link to={`/editoutbound/${outbound.id}`}>Edit</Link></button>
                                     </td>
                                 </tr>
@@ -92,6 +108,12 @@ const OutboundContent = () => {
                     </table>
                 </div>
             </div>
+            {/* Modal */}
+            <ConfirmationModal
+                showModal={showModal}
+                setShowModal={setShowModal}
+                onConfirm={handleDelete}
+            />
         </div>
     )
 }

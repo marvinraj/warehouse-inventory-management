@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import ConfirmationModal from './ConfirmationModal'
 
 const InventoryContent = () => {
 
     const [products, setProducts] = useState([])
     const [search, setSearch] = useState('')
-    const [showModal, setShowModal] = useState(false); // Modal visibility
-    const [productToDelete, setProductToDelete] = useState(null); // Product ID to delete
+    const [showModal, setShowModal] = useState(false);
+    const [productToDelete, setProductToDelete] = useState(null);
 
     // fetch all products
     useEffect(() => {
@@ -29,9 +30,9 @@ const InventoryContent = () => {
         try{
             console.log(`Deleting product with ID: ${productToDelete}`);
             await axios.delete(`http://localhost:5000/api/inventory/${productToDelete}`);
-            setShowModal(false); // Close the modal
-            setProductToDelete(null); // Reset the product ID
-            // Reload the products list after deletion
+            setShowModal(false); // close the modal
+            setProductToDelete(null); // reset the product ID
+            // reload the products list after deletion
             const res = await axios.get(`http://localhost:5000/api/inventory/?search=${search}`);
             setProducts(res.data);
             console.log('Updated Products after delete:', res.data);
@@ -40,53 +41,16 @@ const InventoryContent = () => {
         }
     }
 
-    // Confirmation Modal Component
-    const ConfirmationModal = ({ showModal, setShowModal, productToDelete, onConfirm }) => {
-        return (
-            <>
-                {showModal && (
-                    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-                        <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-                            <h2 className="text-lg font-bold">Are you sure you want to delete this product?</h2>
-                            <div className="mt-4 flex justify-end space-x-4">
-                                <button
-                                    className="bg-red-500 text-white px-4 py-2 rounded-lg"
-                                    onClick={() => onConfirm(productToDelete)}
-                                >
-                                    Yes, Delete
-                                </button>
-                                <button
-                                    className="bg-gray-500 text-white px-4 py-2 rounded-lg"
-                                    onClick={() => setShowModal(false)}
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </>
-        );
-    };
-
-
     // handle delete click (open modal)
     const handleDeleteClick = (id) => {
-        setProductToDelete(id); // Set the product to delete
-        setShowModal(true); // Show the modal
+        setProductToDelete(id); // set the product to delete
+        setShowModal(true); // show the modal
     };
 
     // handle search input change
     const handleSearchChange = (e) => {
         setSearch(e.target.value);
     };
-
-    // handle search button click (use later)
-    // const handleSearchClick = () => {
-    //     // Trigger product fetch based on the current search term
-    //     setSearch(search);
-    // };
-
 
     return (
         <div>
@@ -95,7 +59,7 @@ const InventoryContent = () => {
             {/* inventory content */}
             <div className='inventory-content ml-64 px-8 mt-5'>
                 {/* inventory title */}
-                <h1 className='text-2xl font-bold'>INVENTORY</h1>
+                <h1 className='text-3xl font-bold'>INVENTORY</h1>
                 <div className="search-bar add-button flex justify-between mt-4">
                     {/* search bar */}
                     <div className='w-1/2 flex justify-end items-center relative'>
@@ -150,7 +114,7 @@ const InventoryContent = () => {
             <ConfirmationModal
                 showModal={showModal}
                 setShowModal={setShowModal}
-                onConfirm={handleDelete} // Handle delete confirmation
+                onConfirm={handleDelete}
             />
         </div>
     )
