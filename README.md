@@ -13,7 +13,7 @@ A full-stack application for managing warehouse operations, including inventory 
 ## Installation & Setup
 1. Clone repository:
 ```bash
-git clone https://github.com/your-username/warehouse-inventory.git
+git clone https://github.com/marvinraj/warehouse-inventory-management.git
 ```
 2. Install Dependencies:
 - server side
