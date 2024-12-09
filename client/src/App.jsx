@@ -13,6 +13,7 @@ import AddOutbound from './pages/AddOutbound'
 import EditOutbound from './pages/EditOutbound'
 import LoginPage from './pages/LoginPage'
 import UserManagement from './pages/UserManagement'
+import LandingPage from './pages/LandingPage'
 
 function App() {
   return (
@@ -28,8 +29,9 @@ function App() {
       <Route path='/outbound' element={<Outbound/>}/>
       <Route path='/addoutbound' element={<AddOutbound/>} />
       <Route path='/editoutbound/:id' element={<EditOutbound/>} />
-      <Route path='/' element={<LoginPage/>} />
+      <Route path='/login' element={<LoginPage/>} />
       <Route path='/users' element={<UserManagement/>} />
+      <Route path='/' element={<LandingPage/>} />
     </Routes>
       {/* <div className='main-page'>
         <Sidebar/>

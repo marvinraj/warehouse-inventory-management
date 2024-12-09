@@ -38,7 +38,7 @@ const LoginPage = () => {
                 <h1 className="font-bold text-2xl text-center mb-5">LOGIN FORM</h1>
                 {/* inputs & labels */}
                 <div className="mb-5">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 ">Your username:</label>
                     <input
                         type="text"
                         onChange={(e) => setUsername(e.target.value)}
@@ -47,7 +47,7 @@ const LoginPage = () => {
                         required/>
                 </div>
                 <div className="mb-5">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 ">Your password</label>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 ">Your password:</label>
                     <input
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
